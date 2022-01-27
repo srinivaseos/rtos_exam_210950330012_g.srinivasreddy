@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/CMakeFiles/bootloader
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/CMakeFiles/bootloader.rule
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/CMakeFiles/bootloader-complete.rule
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/srinivas/esp/esp-idf/rtos_exam_210950330012_g.srinivasreddy/q1/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
