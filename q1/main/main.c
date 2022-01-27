@@ -1,65 +1,92 @@
+
 #include <stdio.h>
-#include <freertos/task.h>
 #include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+#include <driver/gpio.h>
 #include <freertos/queue.h>
 
-TaskHandle_t task_handle1;
-TaskHandle_t task_handle2;
-TaskHandle_t task_handle3;
-QueueHandle_t queue_handle1;
+QueueHandle_t queue;
+TaskHandle_t xHandle_1;
+TaskHandle_t xHandle_2;
+TaskHandle_t xHandle_3;
+TaskHandle_t xHandle_4;
+TaskHandle_t xHandle_5;
 
-void task1(void *pv)
-{
-    //int sendingdata =0;
-    while(1)
-    {
-        //sending data++;
-        printf("hello this is task 1/n");
-        vTaskDelay(1000 /portTICK_PERIOD_MS);
-    }
-}
-void task2(void *pv)
+void Task1(void *pvparameters)
 {
     while(1)
     {
-        printf("hello this is task 2/n");
-        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        printf("Task1 RUNNING\n");
+        vTaskDelay(1000/ portTICK_PERIOD_MS);
     }
 }
-void task3(void *pv)
+
+void Task2(void *pvparameters)
 {
     while(1)
     {
-        printf("hello this is task 3/n");
-        vTaskDelay(5000 / portTICK_PERIOD_MS);
+        printf("Task2 RUNNING\n");
+        vTaskDelay(2000/ portTICK_PERIOD_MS);
     }
 }
-void sending_queue(void *pv)
+
+void Task3(void *pvparameters)
 {
-    int sendingdata = 0;
     while(1)
     {
-        sendingdata++;
-        printf("sending data is %d\n",sendingdata);
-        xQueueSend(queue_handle1,&sending_queue,portMAX_DELAY);
+        printf("Task3 RUNNING\n");
+        vTaskDelay(5000/ portTICK_PERIOD_MS);
     }
 }
-void receiving_queue(void *pv)
+void Task4(void *pvparameters)
 {
-    int receiving_queue =0;
+    int sending_data=0;
     while(1)
     {
-        xQueueReceive(queue_handle1,&receiving_queue,portMAX_DELAY);
-        printf("receiving data is %d\n",receiving_queue);
+        sending_data++;
+        printf("Task4  RUNNING:%d\n",sending_data);
+        xQueueSend(queue,&sending_data,portMAX_DELAY);
+        vTaskDelay(100/ portTICK_PERIOD_MS);
     }
 }
+void Task5(void *pvparameters)
+{
+    while(1)
+    {
+         int rece_data=0;
+        xQueueReceive(queue,&rece_data,portMAX_DELAY);
+        printf("RECEIVED DATA :%d\n",rece_data);
+        vTaskDelay(1000/ portTICK_PERIOD_MS);
+    }
+}
+
 void app_main()
 {
-    queue_handle1 = xQueueCreate(10,sizeof(int));
-    xTaskCreate(task1,"hello",2048,NULL,5,&task_handle1);
-    xTaskCreate(task2,"hello",2048,NULL,6,&task_handle2);
-    xTaskCreate(task3,"hello",2048,NULL,7,&task_handle3);
-    xTaskCreate(sending_queue,"hello",NULL,8,NULL);
-    xTaskCreate(receiving_queue,"hello",NULL,9,NULL);
+    queue=xQueueCreate(4,sizeof(int));
+    BaseType_t result;
+    result=xTaskCreate(Task1, "Task1",2048,NULL,5,&xHandle_1);
+    if(result==pdPASS)
+    {
+        printf("Task1 created\n");
+    }
+    result=xTaskCreate(Task2,"Task2",2048,NULL,6,&xHandle_2);
+    if(result==pdPASS)
+    {
+        printf("Task2 created\n");
+    }
+    result=xTaskCreate(Task3,"Task3",2048,NULL,7,&xHandle_3);
+    if(result==pdPASS)
+    {
+        printf("Task3 created\n");
+    }
+    result=xTaskCreate(Task4, "Task4",2048,NULL,8,&xHandle_4);
+    if(result==pdPASS)
+    {
+        printf("Task4 created\n");
+    }
+    result=xTaskCreate(Task5, "Task5",2048,NULL,9,&xHandle_5);
+    if(result==pdPASS)
+    {
+        printf("Task5 created\n");
+    }
 }
-
